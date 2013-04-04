@@ -1,0 +1,118 @@
+<?php
+echo 'submitter_guid='.$vars['submitter_guid']. ' group_guid='.$vars['group_guid'];
+if ($vars['entity']) {
+?>
+<div>
+	<label><?php echo elgg_echo('user:name:label'); ?></label>
+	<?php echo elgg_view('input/text', array('name' => 'name', 'value' => $vars['entity']->name)); ?>
+</div>
+<?php
+} else {
+?>
+<div>
+        <label><?php echo elgg_echo('name');?></label><br />
+        <?php
+        echo elgg_view('input/text', array(
+                'name' => 'name',
+                'value' => $name,
+        ));
+        ?>
+</div>
+<div>
+        <label><?php echo elgg_echo('username'); ?></label><br />
+        <?php
+        echo elgg_view('input/text', array(
+                'name' => 'username',
+                'value' => $username,
+        ));
+        ?>
+</div>
+<div>
+        <label><?php echo elgg_echo('email'); ?></label><br />
+        <?php
+        echo elgg_view('input/text', array(
+                'name' => 'email',
+                'value' => $email,
+        ));
+        ?>
+</div>
+<div>
+        <label><?php echo elgg_echo('password'); ?></label><br />
+        <?php
+        echo elgg_view('input/password', array(
+                'name' => 'password',
+                'value' => $password,
+        ));
+        ?>
+</div>
+<div>
+        <label><?php echo elgg_echo('passwordagain'); ?></label><br />
+        <?php
+        echo elgg_view('input/password', array(
+                'name' => 'password2',
+                'value' => $password2,
+        ));
+        ?>
+</div>
+<?php
+}
+?>
+
+<?php
+$profile_fields = elgg_get_config('profile_fields');
+if (is_array($profile_fields) && count($profile_fields) > 0) {
+	foreach ($profile_fields as $shortname => $valtype) {
+		if ($vars['entity']) {
+			$metadata = elgg_get_metadata(array(
+				'guid' => $vars['entity']->guid,
+				'metadata_name' => $shortname
+			));
+		}
+		if ($metadata) {
+			if (is_array($metadata)) {
+				$value = '';
+				foreach ($metadata as $md) {
+					if (!empty($value)) {
+						$value .= ', ';
+					}
+					$value .= $md->value;
+					$access_id = $md->access_id;
+				}
+			} else {
+				$value = $metadata->value;
+				$access_id = $metadata->access_id;
+			}
+		} else {
+			$value = '';
+			$access_id = ACCESS_DEFAULT;
+		}
+
+?>
+<div>
+	<label><?php echo elgg_echo("profile:{$shortname}") ?></label>
+	<?php
+		$params = array(
+			'name' => $shortname,
+			'value' => $value,
+		);
+		echo elgg_view("input/{$valtype}", $params);
+		$params = array(
+			'name' => "accesslevel[$shortname]",
+			'value' => $access_id,
+		);
+		echo elgg_view('input/hidden', $params);
+		//echo elgg_view('input/access', $params);
+	?>
+</div>
+<?php
+	}
+}
+?>
+<div class="elgg-foot">
+<?php
+	echo elgg_view('input/hidden', array('name' => 'submitter_guid', 'value' => $vars['submitter_guid']));
+	echo elgg_view('input/hidden', array('name' => 'group_guid', 'value' => $vars['group_guid']));
+	echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['entity']->guid));
+	echo elgg_view('input/submit', array('name' => 'submit','value' => elgg_echo('save')));
+?>
+</div>

@@ -1,0 +1,52 @@
+8
+
+dir
+1715
+https://routier.zapto.org/svn/mercury/trunk/home/sroutier/src/work/dfait/elgg/elgg-1.8.3/mod/login_as/languages
+https://routier.zapto.org/svn/mercury
+
+
+
+2012-04-27T00:35:23.771271Z
+1118
+bruno
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+9fbdad93-6a33-634f-88cc-e4c16718f7d2
+
+en.php
+file
+
+
+
+
+2013-03-08T13:12:56.000000Z
+48739d7068e83571e09e3bbf32e3d8e3
+2012-04-27T00:35:23.771271Z
+1118
+bruno
+
+fr.php
+file
+
+
+
+
+2013-03-08T13:12:56.000000Z
+ce64d2c44b9045fd8356f06536fea834
+2012-04-27T00:35:23.771271Z
+1118
+bruno
+

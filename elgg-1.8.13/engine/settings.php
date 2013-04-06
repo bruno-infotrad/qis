@@ -42,7 +42,7 @@ $CONFIG->dbuser = 'qis';
  *
  * @global string $CONFIG->dbpass
  */
-$CONFIG->dbpass = 'Passw!2345';
+$CONFIG->dbpass = 'password';
 
 /**
  * The database name

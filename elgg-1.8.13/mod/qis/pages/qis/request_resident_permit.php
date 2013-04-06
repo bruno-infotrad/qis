@@ -15,7 +15,7 @@ $user_role = roles_get_role();
 
 $title = elgg_echo('qis:request_resident_permit');
 $form = elgg_view_form('qis/request_resident_permit', array('enctype' => 'multipart/form-data'));
-$body = elgg_view_layout('one_sidebar', array(
+$body = elgg_view_layout('one_column', array(
         'content' => $form,
         'title' => $title,
 ));

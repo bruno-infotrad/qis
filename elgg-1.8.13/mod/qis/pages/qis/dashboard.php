@@ -24,11 +24,10 @@ $content = <<<__HTML
 <div style='font-size: 14px'>To do:
 <ul><li>Feb 19, 2013: Sign business visa form for Cathy Hill, HP (under QShield Sponsorship)
 <ul><li>Feb 21, 2013: Sign business visa form for Peter Brown, Microsoft (under QShield Sponsorship)
-<ul><li>QISTYPE $user->username
 </ul/div>
 __HTML;
 $content.=elgg_view_menu('qis', array('sort_by' => 'priority'));
-$body = elgg_view_layout('content', array(
+$body = elgg_view_layout('one_column', array(
 	'content' => $content,
 	'title' => $title,
 ));

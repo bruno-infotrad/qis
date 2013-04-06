@@ -39,7 +39,6 @@ if ($user_guid) {
 }
 
 if ($user && $user instanceOf ElggUser) {
-	$content .= '<table id="qis_ris"><tr><th>Citizenship</th><th>Document Number</th><th>Passport Copy</th><th>Date of Issue</th><th>Expiry Date</th><th>Action</th></tr>';
 	$citizenships = elgg_get_entities_from_metadata(array(
         	'types' => 'object',
         	'subtypes' => 'file',
@@ -47,23 +46,14 @@ if ($user && $user instanceOf ElggUser) {
 		'metadata_name_value_pairs' => array('name'  => 'employee_guid', 'value' => $user_guid),
         	'full_view' => FALSE,
 	));
-	if ($citizenships) {
-		foreach ($citizenships as $citizenship) {
-			$content .= elgg_view('qis/citizenship',array('citizenship' => $citizenship, 'user_guid' => $user_guid));
-		}
-	}
-	$content .= '</table>';
-
-	$sub_but = elgg_view('input/submit', array('value' => elgg_echo('new_citizenship')));
-	$content .= elgg_view('input/form', array('body' => $sub_but, 'action' => "{$CONFIG->url}qis/add_citizenship/$user_guid"));
+	$content .= elgg_view('qis/citizenships',array('citizenships' => $citizenships, 'user_guid' => $user_guid));
 }
 
 $params = array(
         'content' => $content,
         'title' => $title,
 );
-$body = elgg_view_layout('one_sidebar', $params);
-
+$body = elgg_view_layout('one_column', $params);
 echo elgg_view_page($title, $body);
 elgg_set_context($context);
 }

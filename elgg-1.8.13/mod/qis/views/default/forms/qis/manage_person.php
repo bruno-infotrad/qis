@@ -1,16 +1,16 @@
 <?php
-echo 'submitter_guid='.$vars['submitter_guid']. ' group_guid='.$vars['group_guid'];
+$class='qis-user-att';
 if ($vars['entity']) {
 ?>
-<div>
+<div class="<?php echo $class?>">
 	<label><?php echo elgg_echo('user:name:label'); ?></label>
 	<?php echo elgg_view('input/text', array('name' => 'name', 'value' => $vars['entity']->name)); ?>
 </div>
-<div>
+<div class="<?php echo $class?>">
         <label><?php echo elgg_echo('username'); ?></label>
         <?php echo $vars['entity']->username ?>
 </div>
-<div>
+<div class="<?php echo $class?>">
         <label><?php echo elgg_echo('email'); ?></label><br />
         <?php
         echo elgg_view('input/text', array(
@@ -22,7 +22,7 @@ if ($vars['entity']) {
 <?php
 } else {
 ?>
-<div>
+<div class="<?php echo $class?>">
         <label><?php echo elgg_echo('name');?></label><br />
         <?php
         echo elgg_view('input/text', array(
@@ -31,7 +31,7 @@ if ($vars['entity']) {
         ));
         ?>
 </div>
-<div>
+<div class="<?php echo $class?>">
         <label><?php echo elgg_echo('username'); ?></label><br />
         <?php
         echo elgg_view('input/text', array(
@@ -40,7 +40,7 @@ if ($vars['entity']) {
         ));
         ?>
 </div>
-<div>
+<div class="<?php echo $class?>">
         <label><?php echo elgg_echo('email'); ?></label><br />
         <?php
         echo elgg_view('input/text', array(
@@ -49,7 +49,7 @@ if ($vars['entity']) {
         ));
         ?>
 </div>
-<div>
+<div class="<?php echo $class?>">
         <label><?php echo elgg_echo('password'); ?></label><br />
         <?php
         echo elgg_view('input/password', array(
@@ -58,7 +58,7 @@ if ($vars['entity']) {
         ));
         ?>
 </div>
-<div>
+<div class="<?php echo $class?>">
         <label><?php echo elgg_echo('passwordagain'); ?></label><br />
         <?php
         echo elgg_view('input/password', array(
@@ -197,6 +197,7 @@ if ($vars['entity']) {
 				}
 			}
 		
+			$class='qis-user-att';
 			$tabs[] = array(
 				'title' => $title,
 				'url' => "#" . $cat_guid,

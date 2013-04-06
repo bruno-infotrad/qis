@@ -18,10 +18,62 @@ function qis_init() {
 	elgg_register_simplecache_view('js/qis');
 	elgg_register_js('elgg.qis', $qis_js);
 	elgg_extend_view('css/elgg', 'qis/css');
-
+	//Index page handler
+	elgg_register_plugin_hook_handler('index', 'system', 'qis_index_handler');
+	//Page handlers
+	elgg_register_page_handler('get_citizenship_docs', 'get_citizenship_docs');
 	//elgg_register_ajax_view('thewire/previous');
 
 	// add menu items
+	elgg_register_menu_item('qis', array(
+                        'name' => 'manage_persons',
+                        'href' => "qis/manage_persons",
+                        'text' => elgg_echo('manage_persons'),
+                        'title' => elgg_echo('manage_persons'),
+                        'class' => "elgg-button elgg-button-submit elgg-button-dashboard",
+                        'priority' => 300,
+                ));
+	elgg_register_menu_item('qis', array(
+                        'name' => 'add_person',
+                        'href' => "qis/manage_person",
+                        'text' => elgg_echo('add_person'),
+                        'title' => elgg_echo('add_person'),
+                        'class' => "elgg-button elgg-button-submit elgg-button-dashboard",
+                        'priority' => 310,
+                ));
+	elgg_register_menu_item('qis', array(
+                        'name' => 'manage_immigration_services',
+                        'href' => "qis/manage_immigration_services",
+                        'text' => elgg_echo('manage_immigration_services'),
+                        'title' => elgg_echo('manage_immigration_services'),
+                        'class' => "elgg-button elgg-button-submit elgg-button-dashboard",
+                        'priority' => 320,
+                ));
+	elgg_register_menu_item('qis', array(
+                        'name' => 'manage_immigration_requests',
+                        'href' => "qis/manage_immigration_requests",
+                        'text' => elgg_echo('manage_immigration_requests'),
+                        'title' => elgg_echo('manage_immigration_requests'),
+                        'class' => "elgg-button elgg-button-submit elgg-button-dashboard",
+                        'priority' => 330,
+                ));
+	elgg_register_menu_item('qis', array(
+                        'name' => 'request_resident_permit',
+                        'href' => "qis/manage_rp_request",
+                        'text' => elgg_echo('request_resident_permit'),
+                        'title' => elgg_echo('request_resident_permit'),
+                        'class' => "elgg-button elgg-button-submit elgg-button-dashboard",
+                        'priority' => 340,
+                ));
+	elgg_register_menu_item('qis', array(
+                        'name' => 'manage_corporate_information',
+                        'href' => "",
+                        'text' => elgg_echo('manage_corporate_information'),
+                        'title' => elgg_echo('manage_corporate_information'),
+                        'class' => "elgg-button elgg-button-submit elgg-button-dashboard",
+                        'priority' => 350,
+                ));
+/*
 	$item = new ElggMenuItem('qis_manage_corporate_information', elgg_echo('qis:manage_corporate_information'), 'qis/manage_corporate_information');
 	elgg_register_menu_item('qis', $item);
 	$item = new ElggMenuItem('qis_manage_persons', elgg_echo('qis:manage_persons'), 'qis/manage_persons');
@@ -32,6 +84,7 @@ function qis_init() {
 	elgg_register_menu_item('qis', $item);
 	$item = new ElggMenuItem('qis_view_reports', elgg_echo('qis:view_reports'), 'qis/view_reports');
 	elgg_register_menu_item('qis', $item);
+*/
 	// owner block menu
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'qis_owner_block_menu');
 
@@ -68,27 +121,20 @@ function qis_init() {
 
 	// Register actions
 	$action_base = elgg_get_plugins_path() . 'qis/actions/qis';
-	elgg_register_action("qis/add_citizenship", "$action_base/add_citizenship.php");
+	elgg_register_action("qis/manage_citizenship", "$action_base/manage_citizenship.php");
 	elgg_register_action("qis/manage_person", "$action_base/manage_person.php");
-	elgg_register_action("qis/ResidentPermitRequest", "$action_base/RPRequest.php");
-	elgg_register_action("qis/QuotaRequest", "$action_base/QuotaRequest.php");
+	elgg_register_action("qis/manage_rp_request", "$action_base/manage_rp_request.php");
+	//custom look
+	elgg_unregister_menu_item('topbar', 'elgg_logo');
 }
 
-/**
- * The wire page handler
- *
- * Supports:
- * thewire/all                  View site wire posts
- * thewire/owner/<username>     View this user's wire posts
- * thewire/following/<username> View the posts of those this user follows
- * thewire/reply/<guid>         Reply to a post
- * thewire/view/<guid>          View a post
- * thewire/thread/<id>          View a conversation thread
- * thewire/tag/<tag>            View wire posts tagged with <tag>
- *
- * @param array $page From the page_handler function
- * @return bool
- */
+// Index page handler
+function qis_index_handler() {
+        if (elgg_is_logged_in()) {
+                forward('qis/dashboard');
+        }
+}
+
 function qis_page_handler($page) {
 
 	$base_dir = elgg_get_plugins_path() . 'qis/pages/qis';
@@ -102,14 +148,11 @@ function qis_page_handler($page) {
 			include "$base_dir/activate.php";
 			break;
 
-		case "add_citizenship":
+		case "view_person":
 			if (isset($page[1])) {
-				set_input('user_guid', $page[1]);
+				set_input('guid', $page[1]);
 			}
-			if (isset($page[2])) {
-				set_input('guid', $page[2]);
-			}
-			include "$base_dir/add_citizenship.php";
+			include "$base_dir/ajax/view_person.php";
 			break;
 
 		case "dashboard":
@@ -120,8 +163,26 @@ function qis_page_handler($page) {
 			include "$base_dir/deactivate.php";
 			break;
 
+		case "manage_citizenship":
+			if (isset($page[1])) {
+				set_input('user_guid', $page[1]);
+			}
+			if (isset($page[2])) {
+				set_input('guid', $page[2]);
+			}
+			include "$base_dir/manage_citizenship.php";
+			break;
+
 		case "manage_corporate_information":
 			include "$base_dir/manage_corporate_information.php";
+			break;
+
+		case "manage_immigration_services":
+			include "$base_dir/manage_immigration_services.php";
+			break;
+
+		case "manage_immigration_requests":
+			include "$base_dir/manage_immigration_requests.php";
 			break;
 
 		case "manage_person":
@@ -135,15 +196,11 @@ function qis_page_handler($page) {
 			include "$base_dir/manage_persons.php";
 			break;
 
-		case "request_immigration_service":
+		case "manage_rp_request":
 			if (isset($page[1])) {
 				set_input('request_guid', $page[1]);
 			}
-			include "$base_dir/request_immigration_service.php";
-			break;
-
-		case "request_immigration_services":
-			include "$base_dir/request_immigration_services.php";
+			include "$base_dir/manage_rp_request.php";
 			break;
 
 		case "request_resident_permit":
@@ -185,8 +242,8 @@ function qis_user_permissions_override($hook_name, $entity_type, $return_value, 
 }
 
 function qis_file_permissions_override($hook_name, $entity_type, $return_value, $params) {
-	if ((elgg_get_context() == 'add_citizenship') ||
-	    (elgg_get_context() == 'request_immigration_service')) {
+	if ((elgg_get_context() == 'manage_citizenship') ||
+	    (elgg_get_context() == 'manage_rp_request')) {
 	$user = $params['user'];
 	$object = $params['entity'];
 	if ($user && $object) {
@@ -237,4 +294,9 @@ function qis_roles_config($hook_name, $entity_type, $return_value, $params) {
 	} else {
 		return array_merge($return_value, $roles);
 	}
+}
+
+function get_citizenship_docs() {
+        require_once elgg_get_plugins_path() . 'qis/lib/get_citizenship_docs.php';
+        return true;
 }

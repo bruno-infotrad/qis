@@ -22,6 +22,6 @@ $mime = $file->mimetype;
 $base_type = substr($mime, 0, strpos($mime,'/'));
 
 $mod_but .= elgg_view('input/submit', array('value' => elgg_echo('modify_delete')));
-$mod_form .= elgg_view('input/form', array('body' => $mod_but, 'action' => "{$CONFIG->url}qis/add_citizenship/$user_guid/$file->guid"));
+$mod_form .= elgg_view('input/form', array('body' => $mod_but, 'action' => "{$CONFIG->url}qis/manage_citizenship/$user_guid/$file->guid"));
 
 echo "<tr><td>$country</td><td>$number</td><td>".elgg_view_entity_icon($file, 'small')."</td><td>$date_of_issue</td><td>$expiry_date</td><td>$mod_form</td></tr>";

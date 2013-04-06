@@ -6,7 +6,7 @@ if (!$user) {
 }
 
 $name = $user->name;
-$type = $user->type;
+$type = $user->qisusertype
 $mod_but .= elgg_view('input/submit', array('value' => elgg_echo('modify_delete')));
 $mod_form .= elgg_view('input/form', array('body' => $mod_but, 'action' => "{$CONFIG->url}qis/manage_person/$user->guid"));
 

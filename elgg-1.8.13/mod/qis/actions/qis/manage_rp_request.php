@@ -51,7 +51,7 @@ if (($operation == elgg_echo('save')) || ($operation == elgg_echo('submit'))) {
 	} else {
 		// load original file object
 		$request = get_entity($guid);
-		if ((!$request) || (!($request instanceof qisResidentPermitRequest))) {
+		if ((!$request) || ($request->qistype != 'resident_permit_request')) {
 			register_error(elgg_echo('request:cannotload'));
 			forward(REFERER);
 		}
@@ -110,7 +110,7 @@ if (($operation == elgg_echo('save')) || ($operation == elgg_echo('submit'))) {
 	$user_guid = (int) get_input('user_guid');
 	
 	$request = get_entity($guid);
-	if (!$request->guid) {
+	if ((!$request) || ($request->qistype != 'resident_permit_request')) {
 	        register_error(elgg_echo("request:deletefailed"));
 	        forward('qis/manage_rp_request');
 	}

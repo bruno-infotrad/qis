@@ -1,6 +1,6 @@
 <?php 
 	
-	$user_guid = elgg_extract("user_guid", $vars); // input name of the selected user
+	$user_guid = elgg_extract("user_guid", $vars);
 	$site_url = elgg_get_site_url();
 ?>
 	<select id="passport-number" class="elgg-input" name="passport_guid"/>

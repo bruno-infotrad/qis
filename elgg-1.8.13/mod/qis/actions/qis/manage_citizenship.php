@@ -47,6 +47,7 @@ if ($operation == elgg_echo('save') || $operation == elgg_echo('upload')) {
 		$file->subtype = "file";
 		//$file->owner_guid = $user_guid;
 		$file->employee_guid = $user_guid;
+		$file->qistype = 'passport';
 	
 		// if no title on new upload, grab filename
 		if (empty($title)) {
@@ -80,6 +81,7 @@ if ($operation == elgg_echo('save') || $operation == elgg_echo('upload')) {
 	$file->expiry_date = $expiry_date;
 	$file->access_id = $access_id;
 	$file->container_guid = $container_guid;
+	$file->qistype = 'passport';
 	
 	$tags = explode(",", $tags);
 	$file->tags = $tags;

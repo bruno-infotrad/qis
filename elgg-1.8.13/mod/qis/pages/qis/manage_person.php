@@ -43,7 +43,11 @@ if ($user && $user instanceOf ElggUser) {
         	'types' => 'object',
         	'subtypes' => 'file',
         	'container_guid' => $group->guid,
-		'metadata_name_value_pairs' => array('name'  => 'employee_guid', 'value' => $user_guid),
+		//'metadata_name_value_pairs' => array('name'  => 'employee_guid', 'value' => $user_guid),
+		'metadata_name_value_pairs' => array(
+							array('name'  => 'employee_guid', 'value' => $user_guid),
+							array('name'  => 'qistype', 'value' => 'passport'),
+						),
         	'full_view' => FALSE,
 	));
 	$content .= elgg_view('qis/citizenships',array('citizenships' => $citizenships, 'user_guid' => $user_guid));

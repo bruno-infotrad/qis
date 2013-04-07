@@ -135,4 +135,3 @@
 		echo $about;
 	}
 
-	echo '</div>';

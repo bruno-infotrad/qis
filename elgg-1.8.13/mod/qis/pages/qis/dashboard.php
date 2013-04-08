@@ -21,11 +21,12 @@ $user_role = roles_get_role();
 $title = elgg_echo('qis:dashboard');
 
 $content = <<<__HTML
-<div style='font-size: 14px'>To do:
+<div class="qis-to-do"><h2>To do:</h2>
 <ul><li>Feb 19, 2013: Sign business visa form for Cathy Hill, HP (under QShield Sponsorship)
 <ul><li>Feb 21, 2013: Sign business visa form for Peter Brown, Microsoft (under QShield Sponsorship)
-</ul/div>
+</ul></div>
 __HTML;
+$content.=elgg_view('qis/applications_in_progress', array());
 $content.=elgg_view_menu('qis', array('sort_by' => 'priority'));
 $body = elgg_view_layout('one_column', array(
 	'content' => $content,

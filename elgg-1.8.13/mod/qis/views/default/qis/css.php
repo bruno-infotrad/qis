@@ -55,6 +55,30 @@
 	/*float: left;*/
 }
 
+.qis-applications-in-progress,.qis-to-do {
+	border: 2px solid;
+	padding: 5px;
+	margin-top: 10px;
+	min-height: 60px;
+}
+
+.qis-applications-in-progress > h2 {
+	margin-bottom: 10px;
+}
+
+#qis-applications-on-track {
+	font-size: 18px;
+	color: green;
+	float: left;
+	padding: 5px;
+}
+#qis-applications-late {
+	float: right;
+	font-size: 18px;
+	color: red;
+	padding: 5px;
+}
+
 /*  navigation on dashboard */
 .elgg-menu-qis {
         /*position: absolute;

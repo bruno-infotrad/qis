@@ -12,6 +12,8 @@ function qis_init() {
 	// for whole entities
 	elgg_register_plugin_hook_handler('permissions_check', 'user', 'qis_user_permissions_override');
 	elgg_register_plugin_hook_handler('permissions_check', 'object', 'qis_file_permissions_override');
+	//Register group library
+	elgg_register_library('elgg:groups', elgg_get_plugins_path() . 'groups/lib/groups.php');
 	//elgg_register_plugin_hook_handler('permissions_check:group', 'user', 'qis_group_permissions_override');
 	// register the wire's JavaScript
 	$qis_js = elgg_get_simplecache_url('js', 'qis');
@@ -67,7 +69,7 @@ function qis_init() {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'manage_corporate_information',
-                        'href' => "",
+                        'href' => "qis/manage_corporate_info",
                         'text' => elgg_echo('manage_corporate_information'),
                         'title' => elgg_echo('manage_corporate_information'),
                         'class' => "elgg-button elgg-button-submit elgg-button-dashboard",
@@ -122,6 +124,7 @@ function qis_init() {
 	// Register actions
 	$action_base = elgg_get_plugins_path() . 'qis/actions/qis';
 	elgg_register_action("qis/manage_citizenship", "$action_base/manage_citizenship.php");
+	elgg_register_action("qis/manage_corporate_info", "$action_base/manage_corporate_info.php");
 	elgg_register_action("qis/manage_person", "$action_base/manage_person.php");
 	elgg_register_action("qis/manage_rp_request", "$action_base/manage_rp_request.php");
 	//custom look
@@ -173,8 +176,9 @@ function qis_page_handler($page) {
 			include "$base_dir/manage_citizenship.php";
 			break;
 
-		case "manage_corporate_information":
-			include "$base_dir/manage_corporate_information.php";
+		case "manage_corporate_info":
+			elgg_load_library('elgg:groups');
+			include "$base_dir/manage_corporate_info.php";
 			break;
 
 		case "manage_immigration_services":

@@ -5,6 +5,36 @@ $container_guid = elgg_extract('group_guid', $vars);
 $user_guid = elgg_extract('user_guid', $vars);
 $guid = elgg_extract('guid', $vars, null);
 
+//Profile manager piece
+// Build fields
+$categorized_fields = profile_manager_get_categorized_fields($vars['entity'], true);
+$cats = $categorized_fields['categories'];
+$fields = $categorized_fields['fields'];
+
+$user_metadata = profile_manager_get_user_profile_data($vars['entity']);
+
+$edit_profile_mode = elgg_get_plugin_setting("edit_profile_mode", "profile_manager");
+$simple_access_control = elgg_get_plugin_setting("simple_access_control","profile_manager");
+
+if(!empty($cats)){
+
+        // Profile type selector
+        $setting = elgg_get_plugin_setting("profile_type_selection", "profile_manager");
+        if(empty($setting)){
+                // default value
+                $setting = "user";
+        }
+
+        foreach($cats as $cat_guid => $cat){
+                foreach($fields[$cat_guid] as $field){
+                        if ($field->metadata_name == 'pob') {
+                                $citizenships = $field->getOptions();
+                        }
+                }
+        }
+}
+
+
 if ($guid) {
 	$file_label = elgg_echo("file:replace");
 	$submit_label = elgg_echo('save');
@@ -18,7 +48,7 @@ if ($guid) {
 ?>
 <div>
 	<label><?php echo elgg_echo('country'); ?></label><br />
-	<?php echo elgg_view('input/text', array('name' => 'country', 'value' => $file->country)); ?>
+	<?php echo elgg_view('input/dropdown', array('name' => 'country', 'value' => $file->country, 'options' => $citizenships)); ?>
 </div>
 <div>
 	<label><?php echo elgg_echo('number'); ?></label><br />

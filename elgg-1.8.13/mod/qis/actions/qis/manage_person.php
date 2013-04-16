@@ -176,9 +176,9 @@ if ($operation == elgg_echo('save')) {
 	}
 	if ($new_user) {
 		$referent = $_SERVER['HTTP_REFERER'];
-		$referent .= "/$guid";
+		$referent .= '/'.$guid;
 	} else {
-		$referent = REFERER;
+		$referent = $_SERVER['HTTP_REFERER'];
 	}
 	
 	forward($referent);
@@ -204,7 +204,7 @@ if ($operation == elgg_echo('save')) {
 	        register_error(elgg_echo('admin:user:delete:no'));
 	}
 	
-	forward('qis/manage_persons');
+	forward("qis/manage_persons/$group_guid");
 	
 }
 elgg_set_context($context);

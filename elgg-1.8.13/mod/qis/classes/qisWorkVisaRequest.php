@@ -2,7 +2,7 @@
 /**
  * Extended class to override the time_created
  */
-class qisQuotaRequest extends ElggObject {
+class qisWorkVisaRequest extends ElggObject {
 
 	protected function initializeAttributes() {
 		parent::initializeAttributes();

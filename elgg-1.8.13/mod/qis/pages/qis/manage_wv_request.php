@@ -2,7 +2,6 @@
 
 if (elgg_is_logged_in()) {
         $group_guid = get_input('qis_group_guid');
-        elgg_log("BRUNO group_guid $group_guid", 'NOTICE');
         if (! $group_guid) {
                 system_message(elgg_echo("missing_group_guid"));
                 forward('/qis/dashboard');
@@ -11,7 +10,7 @@ if (elgg_is_logged_in()) {
         $access_id = $group->group_acl;
 
 	$context = elgg_get_context();
-	elgg_set_context('manage_rp_request');
+	elgg_set_context('manage_wv_request');
 	$submitter = elgg_get_logged_in_user_entity();
 	//$submitter_groups = get_users_membership ($submitter->guid);
 	//$group_guid = $submitter_groups[0]->guid;
@@ -19,7 +18,7 @@ if (elgg_is_logged_in()) {
 
 	$request_guid = (int) get_input('request_guid');
 	
-	$title = elgg_echo('qis:manage_resident_permit_request');
+	$title = elgg_echo('qis:manage_work_visa_request');
 	
 	
 	if ($request_guid) {
@@ -34,9 +33,9 @@ if (elgg_is_logged_in()) {
 		        forward();
 		}
 	
-		$content = elgg_view_form('qis/manage_rp_request', array(), array('request_guid' => $request_guid,'submitter_guid' => $submitter->guid, 'group_guid'=> $group_guid, 'access_id' => $access_id));
+		$content = elgg_view_form('qis/manage_wv_request', array(), array('request_guid' => $request_guid,'submitter_guid' => $submitter->guid, 'group_guid'=> $group_guid, 'access_id' => $access_id));
 	} else {
-		$content = elgg_view_form('qis/manage_rp_request', array(), array('submitter_guid' => $submitter->guid, 'group_guid'=> $group_guid, 'access_id' => $access_id));
+		$content = elgg_view_form('qis/manage_wv_request', array(), array('submitter_guid' => $submitter->guid, 'group_guid'=> $group_guid, 'access_id' => $access_id));
 	}
 	
 	$params = array(

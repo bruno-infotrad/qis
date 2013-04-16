@@ -1,24 +1,20 @@
 <?php
 
 if (elgg_is_logged_in()) {
-/* Will have to check wich group the user belongs to and which role he has to present the right screen*/
-$db_prefix = elgg_get_config('dbprefix');
-$user = elgg_get_logged_in_user_entity();
-/*
-if ($user->qistype == 'Portal Administrator') {
-	roles_set_role('portal_administrator', $user);
-}
-$user_role = roles_get_role();
+        $group_guid = get_input('qis_group_guid');
+        elgg_log("BRUNO group_guid $group_guid", 'NOTICE');
+        if (! $group_guid) {
+                system_message(elgg_echo("missing_group_guid"));
+                forward('/qis/dashboard');
+        }
+        $group = get_entity($group_guid);
+        $access_id = $group->group_acl;
 
-
-/* now we have user role and group, present screen accordingly*/
-
-$title = elgg_echo('qis:request_resident_permit');
-$form = elgg_view_form('qis/request_resident_permit', array('enctype' => 'multipart/form-data'));
-$body = elgg_view_layout('one_column', array(
-        'content' => $form,
-        'title' => $title,
-));
-echo elgg_view_page($title, $body);
-
+	$title = elgg_echo('qis:request_resident_permit');
+	$form = elgg_view_form('qis/request_resident_permit', array('enctype' => 'multipart/form-data'));
+	$body = elgg_view_layout('one_column', array(
+	        'content' => $form,
+	        'title' => $title,
+	));
+	echo elgg_view_page($title, $body);
 }

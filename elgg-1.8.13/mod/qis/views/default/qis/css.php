@@ -18,9 +18,11 @@
 }
 
 #qis-selected-user {
+	margin-top: -61px;
 	clear: both;
 	float:right;
-	margin-top: -190px;
+	width: 550px;
+	position: relative;
 }
 
 #request-immigration-service {
@@ -31,10 +33,20 @@
 	margin-bottom: 15px
 }
 
-.user-first-line {
+.user-first-line, .first-line {
 	float: left;
-	padding: 20px;
+	padding: 5px;
 	}
+#request-quota,#request-quota-more  {
+	clear: both;
+}
+
+.quantity { width: 40%;}
+.visa { width: 50px;}
+
+#quota-submit {
+	width: 60px;
+}
 
 #qis_ris {
 	border: 5px double;
@@ -77,6 +89,14 @@
 	font-size: 18px;
 	color: red;
 	padding: 5px;
+}
+
+#qis-message {
+	background-color: red;
+	color: black;
+	font-size: 20px;
+	margin: 5px;
+	outline: 1px solid;
 }
 
 /*  navigation on dashboard */

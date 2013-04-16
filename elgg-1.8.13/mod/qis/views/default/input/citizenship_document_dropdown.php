@@ -1,6 +1,8 @@
 <?php 
 	
-	$user_guid = elgg_extract("user_guid", $vars);
+	//$user_guid = elgg_extract("user_guid", $vars);
+	$group_guid = elgg_extract("group_guid", $vars);
+	$request = elgg_extract("request", $vars,'resident_permit');
 	$site_url = elgg_get_site_url();
 ?>
 	<select id="passport-number" class="elgg-input" name="passport_guid"/>
@@ -13,7 +15,7 @@
         			var $dropdown = $(this);
         			//alert($dropdown.prop('outerHTML'));
         			var user_guid = $dropdown.children("option").filter(":selected").val();
-				$.getJSON( "<?php echo $site_url; ?>get_citizenship_docs", {"user_guid": user_guid},function(data){
+				$.getJSON( "<?php echo $site_url; ?>get_citizenship_docs", {"user_guid": user_guid,"group_guid": '<?php echo $group_guid; ?>',"request": '<?php echo $request; ?>'},function(data){
         				//alert($dropdown.children("option").filter(":selected").val());
         				//alert(data.toSource());
 					var $passportNumber = $("#passport-number");

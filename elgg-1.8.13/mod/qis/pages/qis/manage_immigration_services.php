@@ -1,10 +1,4 @@
 <?php
-/**
- * All wire posts
- * 
- */
-
-
 if (elgg_is_logged_in()) {
 /* Will have to check wich group the user belongs to and which role he has to present the right screen*/
 $db_prefix = elgg_get_config('dbprefix');

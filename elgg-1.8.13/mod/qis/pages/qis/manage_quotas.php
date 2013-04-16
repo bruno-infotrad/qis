@@ -13,21 +13,22 @@ if (elgg_is_logged_in()) {
 	$submitter = elgg_get_logged_in_user_entity();
 	//$submitter_groups = get_users_membership ($submitter->guid);
 	//$group_guid = $submitter_groups[0]->guid;
+	//$access_id = $submitter_groups[0]->group_acl;
 	
-	$user = elgg_get_logged_in_user_entity();
-	$user_role = $user->role;
-	$user_group_guid = $user->group;
+	$title = elgg_echo('qis:manage_quotas');
 	
-	$title = elgg_echo('qis:manage_persons');
-	
-	$users = elgg_get_entities_from_relationship(array(
-	        'relationship' => 'member',
-	        'relationship_guid' => $group_guid,
-	        'inverse_relationship' => true,
-	        'types' => 'user',
-	        //'list_type' => 'gallery',
-	        //'gallery_class' => 'elgg-gallery-users',
+	$quotas = elgg_get_entities(array(
+		'types' => 'object',
+		'subtypes' => 'quota',
+		'container_guid' => $group->guid,
+		'full_view' => FALSE,
 	));
-	$body = elgg_view('qis/manage_persons', array('group_guid' => $group_guid,'users' => $users));
+	$content = elgg_view('qis/quotas',array('group_guid'=> $group_guid,'quotas' => $quotas,'access_id' => $access_id));
+	
+	$params = array(
+	        'content' => $content,
+	        'title' => $title,
+	);
+	$body = elgg_view_layout('one_column', $params);
 	echo elgg_view_page($title, $body);
 }

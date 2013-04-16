@@ -1,8 +1,13 @@
 <?php
 $immigration_requests = elgg_extract('immigration_requests', $vars, FALSE);
-$content = '<div><table id="qis_ris"><tr><th>Type</th><th>Person</th><th>Country</th><th>Duration</th><th>Action</th></tr>';
+$group_guid= elgg_extract('group_guid', $vars, FALSE);
+$expli = elgg_extract('expli', $vars, FALSE);
+if ($expli) {
+	$content = '<div id="qis-message">'.$expli.'</div>';
+}
+$content .= '<div><table id="qis_ris"><tr><th>Type</th><th>Person</th><th>Occupation</th><th>Country</th><th>Duration</th><th>Action</th></tr>';
 foreach ($immigration_requests as $immigration_request) {
-	$content .= elgg_view('qis/immigration_request',array('immigration_request' => $immigration_request));
+	$content .= elgg_view('qis/immigration_request',array('group_guid'=> $group_guid,'immigration_request' => $immigration_request));
 }
 $content .= '</table></div>';
 $content .= '<div class="elgg-foot">';

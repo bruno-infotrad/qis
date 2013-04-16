@@ -202,7 +202,7 @@ if ($operation == elgg_echo('save') || $operation == elgg_echo('upload')) {
 	
 		$container = get_entity($container_guid);
 		if (elgg_instanceof($container, 'group')) {
-			forward("qis/manage_person/$user_guid");
+			forward("qis/manage_person/$container_guid/$user_guid");
 		} else {
 			forward("file/owner/$container->username");
 		}
@@ -214,7 +214,7 @@ if ($operation == elgg_echo('save') || $operation == elgg_echo('upload')) {
 			register_error(elgg_echo("file:uploadfailed"));
 		}
 
-	forward("qis/manage_person/$user_guid");
+	forward("qis/manage_person/$container_guid/$user_guid");
 	}
 } elseif ($operation == elgg_echo('delete')) {
 	$guid = (int) get_input('file_guid');
@@ -239,6 +239,6 @@ if ($operation == elgg_echo('save') || $operation == elgg_echo('upload')) {
 	        system_message(elgg_echo("file:deleted"));
 	}
 	
-	forward("qis/manage_person/$user_guid");
+	forward("qis/manage_person/$container_guid/$user_guid");
 }
 elgg_set_context($context);

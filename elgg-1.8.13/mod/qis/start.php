@@ -77,7 +77,13 @@ function qis_init() {
 // Index page handler
 function qis_index_handler() {
         if (elgg_is_logged_in()) {
-                forward('qis/dashboard');
+                forward('/dashboard');
+        } else {
+                $login_box = elgg_view('core/account/login_box');
+                elgg_set_page_owner_guid(1);
+                $content = elgg_view('page/elements/login_buttons', $vars);
+                $body = elgg_view_layout('two_sidebar_river', array( 'title' => $title, 'sidebar'=> $login_box, 'content' => $content));
+                echo elgg_view_page($title, $body);
         }
 }
 

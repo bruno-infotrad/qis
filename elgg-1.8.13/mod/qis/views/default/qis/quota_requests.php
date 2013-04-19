@@ -4,7 +4,7 @@ $quotas = elgg_extract('quotas', $vars, FALSE);
 $group_guid = elgg_extract('group_guid', $vars, FALSE);
 $content = '';
 if ($quotas) {
-	$content = '<div><table id="qis_ris"><tr><th>Request ID</th><th>Quantity</th><th>Citizenship</th><th>Gender</th><th>Occupation</th><th>Status</th><th>Action</th></tr>';
+	$content = '<div id="quota_qis_ris"><table id="qis_ris"><tr><th>Request ID</th><th>Quantity</th><th>Citizenship</th><th>Gender</th><th>Occupation</th><th>Status</th><th>Action</th></tr>';
 	foreach ($quotas as $quota) {
 		$content .= elgg_view('qis/quota_request',array('group_guid'=> $group_guid,'quota' => $quota));
 	}

@@ -201,6 +201,7 @@ h1, h2, h3, h4, h5, h6, .elgg-heading-basic {
 .elgg-body {
 	position: absolute;
         max-width:1000px;
+        position: absolute;
 }
 
 .elgg-page-default .elgg-page-footer > .elgg-inner {
@@ -245,14 +246,12 @@ h1, h2, h3, h4, h5, h6, .elgg-heading-basic {
 	background-image:url(<?php echo elgg_get_site_url(); ?>mod/qis/graphics/google_btn_normal.png);
 }
 
+
 #login-dropdown {
         visibility:hidden;
 }
 
-elgg-body {
-	position: absolute;
-        left: 300px;
-}
+
 
 .elgg-menu-qis {
  	border:none;
@@ -333,6 +332,7 @@ elgg-body {
 	border: none;
 }
 
+
 #qis_ris tr,td,th {
 	border: none;
 	padding: 5px;
@@ -353,73 +353,103 @@ elgg-body {
         background-image:url(<?php echo elgg_get_site_url(); ?>mod/qis/graphics/add_person_div.png);
 }
 
-.elgg-input-text {
-        position: absolute;
-        left: 450px;
+.elgg-input-text {        
         width: 258px;
         height: 36px;
-        font-size: 8px;
+        font-size: 10px;
 }
 
 #name_input {
+        position: absolute;
+        left: 450px;
         top: 390px; 
 }
 
 #email_input {
+        position: absolute;
+        left: 450px;
         top: 440px; 
 }
 
 #password_input {
+        position: absolute;
+        left: 450px;
         top: 500px; 
 }
 
 #firstname {
+        position: absolute;
+        left: 450px;
         top: 570px; 
 }
 
 #lastname {
+        position: absolute;
+        left: 450px;
         top: 630px; 
 }
 
 #dob {
+        position: absolute;
+        left: 450px;
         top: 690px; 
 }
 
+
+
+
+
+
+
+
+
+
+
 #qisusertype {
+        position: absolute;
+        left: 450px;
         top: 740px; 
 }
 
 #marital_status {
+        position: absolute;
+        left: 450px;
         top: 810px; 
 }
 
 #username_input {
+        position: absolute;
         left: 910px;
         top: 390px; 
 }
 
 #password2_input {
+        position: absolute;
         left: 910px;
         top: 500px; 
 }
 
 
 #middlename {
+        position: absolute;
         left: 910px;
         top: 570px; 
 }
 
 #gender {
+        position: absolute;
         left: 910px;
         top: 630px; 
 }
 
 #pob {
+        position: absolute;
         left: 910px;
         top: 690px; 
 }
 
 #profession {
+        position: absolute;
         left: 910px;
         top: 740px; 
 }
@@ -458,3 +488,4 @@ elgg-body {
         top: 310px;
         background-image:url(<?php echo elgg_get_site_url(); ?>mod/qis/graphics/add_quota.png);
 }
+

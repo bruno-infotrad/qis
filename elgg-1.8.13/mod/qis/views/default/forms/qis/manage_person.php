@@ -23,46 +23,46 @@ if ($vars['entity']) {
 } else {
 ?>
 <div class="<?php echo $class?>">
-        <label><?php echo elgg_echo('name');?></label><br />
         <?php
         echo elgg_view('input/text', array(
                 'name' => 'name',
+                'id' => 'name_input',
                 'value' => $name,
         ));
         ?>
 </div>
 <div class="<?php echo $class?>">
-        <label><?php echo elgg_echo('username'); ?></label><br />
         <?php
         echo elgg_view('input/text', array(
                 'name' => 'username',
+                'id' => 'username_input',
                 'value' => $username,
         ));
         ?>
 </div>
 <div class="<?php echo $class?>">
-        <label><?php echo elgg_echo('email'); ?></label><br />
         <?php
         echo elgg_view('input/text', array(
                 'name' => 'email',
+                'id' => 'email_input',
                 'value' => $email,
         ));
         ?>
 </div>
 <div class="<?php echo $class?>">
-        <label><?php echo elgg_echo('password'); ?></label><br />
         <?php
         echo elgg_view('input/password', array(
                 'name' => 'password',
+                'id' => 'password_input',
                 'value' => $password,
         ));
         ?>
 </div>
 <div class="<?php echo $class?>">
-        <label><?php echo elgg_echo('passwordagain'); ?></label><br />
         <?php
         echo elgg_view('input/password', array(
                 'name' => 'password2',
+                'id' => 'password2_input',
                 'value' => $password2,
         ));
         ?>
@@ -245,7 +245,7 @@ if ($vars['entity']) {
 					$field_result = "<div>";
 				}	
 				
-				$field_result .= "<label>" . $title . "</label>";
+				//$field_result .= "<label>" . $title . "</label>";
 				
 				if($hint = $field->getHint()){ 
 					$field_result .= "<span class='custom_fields_more_info' id='more_info_". $metadata_name . "'></span>";		
@@ -267,7 +267,7 @@ if ($vars['entity']) {
 					$field_result .= "</div>";
 				}
 				
-				$field_result .= elgg_view('input/hidden', array('name' => 'accesslevel[' . $metadata_name . ']', 'value' => $access_id)); 
+				$field_result .= elgg_view('input/hidden', array('name' => 'accesslevel[' . $metadata_name . ']', 'id' => 'accesslevel[' . $metadata_name . ']', 'value' => $access_id)); 
 				//$field_result .= elgg_view('input/access', array('name' => 'accesslevel[' . $metadata_name . ']', 'value' => $access_id)); 
 				$field_result .= "</div>";
 				

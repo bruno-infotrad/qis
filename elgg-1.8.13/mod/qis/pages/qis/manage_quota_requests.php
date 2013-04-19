@@ -2,7 +2,6 @@
 
 if (elgg_is_logged_in()) {
         $group_guid = get_input('qis_group_guid');
-        elgg_log("BRUNO group_guid $group_guid", 'NOTICE');
         if (! $group_guid) {
                 system_message(elgg_echo("missing_group_guid"));
                 forward('/qis/dashboard');
@@ -11,9 +10,6 @@ if (elgg_is_logged_in()) {
         $access_id = $group->group_acl;
 
 	$submitter = elgg_get_logged_in_user_entity();
-	//$submitter_groups = get_users_membership ($submitter->guid);
-	//$group_guid = $submitter_groups[0]->guid;
-	//$access_id = $submitter_groups[0]->group_acl;
 	
 	
 	$title = elgg_echo('qis:manage_quota_requests');

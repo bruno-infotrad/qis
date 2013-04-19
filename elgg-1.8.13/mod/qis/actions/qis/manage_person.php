@@ -9,7 +9,6 @@ if ($operation == elgg_echo('save')) {
 	$submitter = get_entity($submitter_guid);
 	$group_guid = get_input('group_guid');
 	$group = get_entity($group_guid);
-	elgg_log("BRUNO submitter_guid $submitter_guid group_guid $group_guid", NOTICE);
 	//Check submitter is group admin
 	if((! $submitter->isAdmin()) && (! $group->isMember($submitter) || ! check_entity_relationship($submitter->getGUID(), "group_admin", $group->getGUID()))){
 		register_error(elgg_echo('pas le droit'));
@@ -162,7 +161,6 @@ if ($operation == elgg_echo('save')) {
 					create_metadata($owner->guid, $shortname, $interval, 'text', $owner->guid, $access_id, $multiple);
 				}
 			} else {
-				elgg_log('BRUNO just before creat_metadata access_id '.$access_id,NOTICE);
 				create_metadata($owner->getGUID(), $shortname, $value, 'text', $owner->getGUID(), $access_id);
 			}
 		}

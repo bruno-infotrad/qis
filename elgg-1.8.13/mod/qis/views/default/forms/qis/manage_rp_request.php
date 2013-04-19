@@ -127,8 +127,12 @@ if ($request_guid) {
 		?>
 	</div>
 	<div class='qis-noc'>
-		<label><?php echo elgg_echo('upload_noc'); ?></label><br />
-        	<?php echo elgg_view('input/file', array('name' => 'noc', 'value' => $noc)); ?>
+		<?php 
+		$mod_but = elgg_view('input/hidden', array('name' => 'request_guid', 'value' => $request_guid));
+		$mod_but .= elgg_view('input/submit', array('value' => elgg_echo('Upload NOC')));
+		$view_form = elgg_view('input/form', array('body' => $mod_but, 'action' => "{$CONFIG->url}qis/manage_document/$group_guid"));
+		echo $view_form;
+		?>
 	</div>
 <?php
 	if ($submitter->qisusertype == 'Immigration Agency Portal Coordinator') {
@@ -151,6 +155,7 @@ if ($request_guid) {
 				echo elgg_view('input/submit', array('name' => 'submit', 'value' => 'Proceed with egov', 'id' => 'qis-submit-button',));
 				echo elgg_view('input/submit', array('name' => 'submit', 'value' => 'Proceed with paper application', 'id' => 'qis-submit-button',));
 			}
+	}
 			?>
 			</div></br>
 		<?php
@@ -161,9 +166,6 @@ if ($request_guid) {
 		echo elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('delete'), 'id' => 'qis-submit-button',));
 		?>
 		</div>
-<?php
-	}
-?>
 </div>
 <?php
 //New request
@@ -256,8 +258,12 @@ if ($request_guid) {
 		?>
 	</div>
 	<div class='qis-noc'>
-		<label><?php echo elgg_echo('upload_noc'); ?></label><br />
-        	<?php echo elgg_view('input/file', array('name' => 'upload')); ?>
+		<?php 
+		$mod_but = elgg_view('input/hidden', array('name' => 'request_guid', 'value' => $request_guid));
+		$mod_but .= elgg_view('input/submit', array('value' => elgg_echo('Upload NOC')));
+		$view_form = elgg_view('input/form', array('body' => $mod_but, 'action' => "{$CONFIG->url}qis/manage_document/$group_guid"));
+		echo $view_form;
+		?>
 	</div>
 
 	</div>

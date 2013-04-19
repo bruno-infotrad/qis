@@ -16,7 +16,6 @@ if((! $submitter->isAdmin()) && (! $group->isMember($submitter) || ! check_entit
         exit();
 }
 //if(!empty($q)){
-	//elgg_log('BRUNO group_guid='.$group_guid.' user_guid='.$user_guid,NOTICE);
 	$citizenships = elgg_get_entities_from_metadata(array(
 		'types' => 'object',
 		'subtypes' => 'file',

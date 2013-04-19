@@ -2,7 +2,6 @@
 
 if (elgg_is_logged_in()) {
         $group_guid = get_input('qis_group_guid');
-        elgg_log("BRUNO group_guid $group_guid", 'NOTICE');
         if (! $group_guid) {
                 system_message(elgg_echo("missing_group_guid"));
                 forward('/qis/dashboard');

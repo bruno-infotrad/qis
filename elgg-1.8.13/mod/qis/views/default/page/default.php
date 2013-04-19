@@ -36,13 +36,14 @@ header("Content-type: text/html; charset=UTF-8");
 $lang = get_current_language();
 
 $logo_url = elgg_get_site_url() . "mod/qis/graphics/qshield.jpg";
+$bg_url = elgg_get_site_url() . "mod/qis/graphics/bg_image.png";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" lang="<?php echo $lang; ?>">
 <head>
 <?php echo elgg_view('page/elements/head', $vars); ?>
 </head>
-<body>
+<body background="<?php echo $bg_url; ?>">
 <div class="elgg-page elgg-page-default">
 	<div class="elgg-page-messages">
 		<?php echo $messages; ?>
@@ -56,8 +57,7 @@ $logo_url = elgg_get_site_url() . "mod/qis/graphics/qshield.jpg";
 	</div>
 	<?php } ?>
 	
-	<div class="elgg-page-header">
-                <img src=<?php echo "$logo_url"?> alt="QSHIELD logo"/>
+	<div class="elgg-page-header">     
 		<div class="elgg-inner">
 			<?php echo $header; ?>
 		</div>

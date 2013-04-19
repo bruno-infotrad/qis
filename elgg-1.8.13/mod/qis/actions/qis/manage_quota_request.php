@@ -23,7 +23,6 @@ if (($operation == elgg_echo('save')) || ($operation == elgg_echo('submit'))) {
 	$input_request->guid = (int) get_input('request_guid');
 	$input_request->tags = get_input("tags");
 
-	elgg_log('BRUNO input_request='.var_export($input_request,true),'NOTICE');
 	
 	// check whether this is a new file or an edit
 	$new_request = true;
@@ -83,8 +82,7 @@ if (($operation == elgg_echo('save')) || ($operation == elgg_echo('submit'))) {
 $diff
 </font>
 __HTML;
-                $request->annotate('comment',$comment,$access_id);
-		elgg_log("BRUNO request=".var_export($request,true),'NOTICE');
+                $request->annotate('comment',$comment,$input_request->access_id);
 	} else {
 		// load original file object
 		if ((!$request) || ($request->qistype != 'quota_request')) {
@@ -120,9 +118,8 @@ __HTML;
 $diff
 </font>
 __HTML;
-                $request->annotate('comment',$comment,$access_id);
+                $request->annotate('comment',$comment,$input_request->access_id);
 
-		elgg_log("BRUNO request=".var_export($request,true),'NOTICE');
 		if (is_array($request->status)) {
 			for ($i=0;$i<count($request->status);$i++) {
 				if ($request->status[$i] == 'Approved') {
@@ -135,7 +132,7 @@ __HTML;
 					$quota->mol_number = $request->mol_number;
 					$quota->paid = $request->paid;
                 			$quota->container_guid = $container_guid;
-                			$quota->access_id = $access_id;
+                			$quota->access_id = $input_request->access_id;
                 			$quota->save();
 				}
 			}
@@ -150,7 +147,7 @@ __HTML;
 				$quota->mol_number = $request->mol_number;
 				$quota->paid = $request->paid;
                 		$quota->container_guid = $container_guid;
-                		$quota->access_id = $access_id;
+                		$quota->access_id = $input_request->access_id;
                 		$quota->save();
 			}
 		}

@@ -5,6 +5,8 @@ $container_guid = elgg_extract('group_guid', $vars);
 $user_guid = elgg_extract('user_guid', $vars);
 $guid = elgg_extract('guid', $vars, null);
 
+elgg_log("BRUNO citizenship guid=$guid",'NOTICE');
+
 //Profile manager piece
 // Build fields
 $categorized_fields = profile_manager_get_categorized_fields($vars['entity'], true);

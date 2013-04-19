@@ -1,7 +1,6 @@
 <?php
 if (elgg_is_logged_in()) {
         $group_guid = get_input('qis_group_guid');
-        elgg_log("BRUNO group_guid $group_guid", 'NOTICE');
         if (! $group_guid) {
                 system_message(elgg_echo("missing_group_guid"));
                 forward('/qis/dashboard');
@@ -13,20 +12,6 @@ if (elgg_is_logged_in()) {
 	elgg_set_context('manage_person');
 	$submitter = elgg_get_logged_in_user_entity();
 	$user_guid = (int) get_input('guid');
-/*
-	$submitter_groups = get_users_membership ($submitter->guid);
-	if ($user_guid) {
-		$user_groups = get_users_membership ($user_guid);
-		if ($submitter_groups[0]->guid != $user_groups[0]->guid) {
-	        	register_error(elgg_echo("profile:noaccess"));
-	        	forward('/qis');
-		} else {
-			$group_guid = $submitter_groups[0]->guid;
-		}
-	} else {
-		$group_guid = $submitter_groups[0]->guid;
-	}
-*/
 	
 	$title = elgg_echo('qis:manage_person');
 	

@@ -78,16 +78,19 @@ if (($operation == elgg_echo('save')) || ($operation == elgg_echo('submit')) ||(
 		$request->save();
 		$guid = $request->getGUID();
 		//Add annotation for historical reasons
+		$state_message = check_object_state($container,$request,TRUE);
 		$creator_name = $submitter->name;
 		$date = date(DATE_RFC822);
 		$comment = <<<__HTML
 <font color='red'><h3>New Resident Permit Request</h3>
 <p> Created on: $date</p>
-<p> Created by: $creator_name</p></font>
+<p> Created by: $creator_name</p>
+$state_message
+</font>
 __HTML;
-		$request->annotate('comment',$comment,$access_id);
+		$request->annotate('comment',$comment,$input_request->access_id);
 	} else {
-		// load original file object
+		// load original object
 		if ((!$request) || ($request->qistype != 'resident_permit_request')) {
 			register_error(elgg_echo('request:cannotload'));
 			forward(REFERER);
@@ -98,6 +101,7 @@ __HTML;
 			register_error(elgg_echo('request:noaccess'));
 			forward(REFERER);
 		}
+		$old_state_message = check_object_state($container,$request,TRUE);
 		$guid = $request->getGUID();
 		$request->user_guid = $input_request->user_guid;
 		$request->passport_guid = $input_request->passport_guid;
@@ -119,6 +123,10 @@ __HTML;
 		$request->access_id = $input_request->access_id;
 		$request->save();
 
+		$new_state_message = check_object_state($container,$request,TRUE);
+		if ($old_state_message != $new_state_message) {
+			$message = $new_state_message;
+		}
 		$modifier_name = $submitter->name;
 		$date = date(DATE_RFC822);
 		$diff = process_diff($input_request,$request);
@@ -126,10 +134,11 @@ __HTML;
 <font color='red'><h3>Modified Resident Permit Request</h3>
 <p> Modified on: $date</p>
 <p> Modified by: $modifier_name</p>
-$diff
+<p> $diff </p>
+$message
 </font>
 __HTML;
-		$request->annotate('comment',$comment,$access_id);
+		$request->annotate('comment',$comment,$input_request->access_id);
 	}
 	
 	

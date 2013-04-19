@@ -6,7 +6,7 @@ function process_diff($input_request,$existing_request) {
 		if (! $existing_request->$key) {
 			$content .= "<p>Added $key=>$value to request</p>";
 		} elseif ($existing_request->$key != $value) {
-			$content .= "<p>modified $key from $existing_request->key to $value to request</p>";
+			$content .= "<p>modified $key from $existing_request->value to $value to request</p>";
 		}
 	}
 	if($content) {
@@ -29,7 +29,21 @@ function check_object_state($group = NULL, $object=NULL,$html) {
 						$content .= '<h3><font color="red">'.elgg_echo('need_visa_info_for ')."$user->name</font></h3>";
 					}
 					if (($object->sponsored == 'yes') && ($object->same_sponsor == 'no') && ! $object->noc) {
-						$content .= '<h3><font color="red">'.elgg_echo('need_noc_for ')."$user->name</font></h3>";
+						$documents = elgg_get_entities_from_metadata(array(
+									'types' => 'object',
+									'subtypes' => 'file',
+									'container_guid' => $group->guid,
+									'metadata_name_value_pairs' => array(
+										array('name'  => 'qistype', 'value' => 'document'),
+										array('name'  => 'document_type', 'value' => 'noc'),
+										array('name'  => 'request_guid', 'value' => $object->guid),
+									),
+									'full_view' => FALSE,
+									'count' => true,
+								));
+						if ($documents != 1) {
+							$content .= '<h3><font color="red">'.elgg_echo('need_noc_for ')."$user->name</font></h3>";
+						}
 					}
 				}
 			}
@@ -98,6 +112,9 @@ function check_object_state($group = NULL, $object=NULL,$html) {
 										if (! $object->blood_test) {
 											$content .= '<h3><font color="red">'.elgg_echo('schedule_blood_test_for ')."$user->name</font></h3>";
 										}
+										if (! $object->fingerprints) {
+											$content .= '<h3><font color="red">'.elgg_echo('schedule_fingerprinting_for ')."$user->name</font></h3>";
+										}
 									}
 								}
 							}
@@ -151,12 +168,12 @@ function check_object_state($group = NULL, $object=NULL,$html) {
 					$num_lines = count($quantity);
         				for ($i=0;$i<$num_lines;$i++) {
 						if ($object->status[$i] == 'Pending') {
-                					$content .= '<h3><font color="red">'.elgg_echo('pending_quota_request_for').$object->guid.'</font></h3>';
+                					$content .= '<h3><font color="red">'.elgg_echo('pending_quota_request_for ').$object->guid.'</font></h3>';
 						}
 					}
 				} else {
 					if ($object->status == 'Pending') {
-                				$content .= '<h3><font color="red">'.elgg_echo('pending_quota_request_for').$object->guid.'</font></h3>';
+                				$content .= '<h3><font color="red">'.elgg_echo('pending_quota_request_for ').$object->guid.'</font></h3>';
 					}
 				}
 			}
@@ -164,66 +181,3 @@ function check_object_state($group = NULL, $object=NULL,$html) {
 	}
 	return $content;
 }
-/*
-function check_quota_and_quota_requests($group, $citizenship=NULL,$occupation=NULL,$gender=NULL,$quantity,$request_type,$html) {
-	$content='';
-	$quotas = elgg_get_entities_from_metadata(array(
-		'types' => 'object',
-		'subtypes' => 'quota',
-		'container_guid' => $group->guid,
-		'metadata_name_value_pairs' => array(
-			array('name'  => 'citizenship', 'value' => $citizenship),
-			array('name'  => 'occupation', 'value' => $occupation),
-			array('name'  => 'gender', 'value' => $gender),
-		),
-		'full_view' => FALSE,
-		'count' => true
-	));
-	if ( $quotas ) {
-		if ($quotas < $quantity) {
-			if ($html) {
-				$content .= '<h3><font color="red">'.elgg_echo('need__additional_quota_request_for ')."$citizenship $occupation $gender</font></h3>";
-			} else {
-				$content = 'NOT_ENOUGH_QUOTA_OR_QUOTA_REQUEST';
-			}
-		}
-	} else {
-		if ( $request_type != 'work_visa' ) {
-			$quota_requests = elgg_get_entities_from_metadata(array(
-			'types' => 'object',
-			'subtypes' => 'immigration_request',
-			'container_guid' => $group->guid,
-			'metadata_name_value_pairs' => array(
-				array('name'  => 'qistype', 'value' => 'quota_request'),
-				array('name'  => 'citizenship', 'value' => $citizenship),
-				array('name'  => 'occupation', 'value' => $occupation),
-				array('name'  => 'gender', 'value' => $gender),
-			),
-			'full_view' => TRUE,
-			'count' => true
-			));
-			//$quota_requests = elgg_get_entity_metadata_where_sql('elgg_entities','elgg_metastrings',NULL,NULL, array( array('name'  => 'qistype', 'value' => 'quota_request'), array('name'  => 'citizenship', 'value' => $citizenship), array('name'  => 'occupation', 'value' => $occupation), array('name'  => 'gender', 'value' => $gender)));
-			//$content .= var_export($quota_requests,true).'<br>';
-			////$content .= 'count='.$quota_requests;
-			//foreach ($quota_requests as $quota_request) {
-			//$content .= var_export($quota_request,true).'<br>';
-			//$content .= 'CITIZENSHIP='.var_export($quota_request->citizenship,true).'<br>';
-			//}
-			if (! $quota_requests ) {
-				if ($html) {
-					$content .= '<h3><font color="red">'.elgg_echo('need_quota_request_for ')."$citizenship $occupation $gender</font></h3>";
-				} else {
-					$content = 'NO_QUOTA_OR_QUOTA_REQUEST';
-				}
-			} elseif ($quota_requests < $quantity) {
-				if ($html) {
-					$content .= '<h3><font color="red">'.elgg_echo('need__additional_quota_request_for ')."$citizenship $occupation $gender</font></h3>";
-				} else {
-					$content = 'NOT_ENOUGH_QUOTA_OR_QUOTA_REQUEST';
-				}
-			}
-		}
-	}
-	return $content;
-}
-*/

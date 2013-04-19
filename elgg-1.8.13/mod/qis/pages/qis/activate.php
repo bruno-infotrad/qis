@@ -6,7 +6,6 @@ $ResidentPermits = elgg_list_entities(array(
         'full_view' => FALSE,
 ));
 
-elgg_log('BRUNO resident_permit'.$ResidentPermits,'NOTICE');
 if (! $ResidentPermits) {
 	$RP0 = new qisResidentPermit();
 	$RP0->subject_guid =41;

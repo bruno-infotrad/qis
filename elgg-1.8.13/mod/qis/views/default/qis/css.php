@@ -211,7 +211,7 @@ h1, h2, h3, h4, h5, h6, .elgg-heading-basic {
 	background-color:transparent;
 	margin-left:200px;
 	margin-top: 320px;
-        background-image:url(https://localhost/qis/elgg-1.8.13/mod/qis/graphics/yahoo_btn_normal.png);
+        background-image:url(<?php echo elgg_get_site_url(); ?>mod/qis/graphics/yahoo_btn_normal.png);
 }
 
 .elgg-button-fb
@@ -221,7 +221,7 @@ h1, h2, h3, h4, h5, h6, .elgg-heading-basic {
 	border:none;
 	background-color:transparent;
 	margin-left:10px;
-	background-image:url(https://localhost/qis/elgg-1.8.13/mod/qis/graphics/fb_btn_normal.png);
+	background-image:url(<?php echo elgg_get_site_url(); ?>mod/qis/graphics/fb_btn_normal.png);
 }
 
 .elgg-button-google
@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6, .elgg-heading-basic {
 	border:none;
 	background-color:transparent;
 	margin-left:10px;
-	background-image:url(https://localhost/qis/elgg-1.8.13/mod/qis/graphics/google_btn_normal.png);
+	background-image:url(<?php echo elgg_get_site_url(); ?>mod/qis/graphics/google_btn_normal.png);
 }
 
 #login-dropdown {

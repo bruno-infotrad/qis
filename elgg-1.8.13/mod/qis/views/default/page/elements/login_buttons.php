@@ -1,8 +1,6 @@
 <?php
 
-    $yahoo_url = elgg_get_site_url() . "mod/qis/graphics/yahoo_btn_normal.png";
-    $fb_url = elgg_get_site_url() . "mod/qis/graphics/fb_btn_normal.png";
-    $google_url = elgg_get_site_url() . "mod/qis/graphics/google_btn_normal.png";
+    
 
 ?>
 

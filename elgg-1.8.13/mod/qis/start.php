@@ -77,7 +77,7 @@ function qis_init() {
 // Index page handler
 function qis_index_handler() {
         if (elgg_is_logged_in()) {
-                forward('/dashboard');
+                forward('qis/dashboard');
         } else {
                 $login_box = elgg_view('core/account/login_box');
                 elgg_set_page_owner_guid(1);

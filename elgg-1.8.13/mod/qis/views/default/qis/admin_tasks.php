@@ -12,7 +12,7 @@ if (elgg_is_logged_in()) {
 
 	
         $user = elgg_get_logged_in_user_entity();
-        $content = '<div class="qis-applications-in-progress">';
+        $content = '<div class="qis-applications-todo">';
         $content .= '<h2>'.elgg_echo('to_do').'</h2>'; 
 	$quota_requests = elgg_get_entities_from_metadata(array(
 		'types' => 'object',

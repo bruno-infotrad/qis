@@ -115,6 +115,7 @@ function qis_page_handler($page) {
 	// add menu items
 	elgg_register_menu_item('qis', array(
                         'name' => 'manage_persons',
+                        'id' => 'manage_persons',
                         'href' => "qis/manage_persons/$qis_group_guid",
                         'text' => elgg_echo('manage_persons'),
                         'title' => elgg_echo('manage_persons'),
@@ -123,6 +124,7 @@ function qis_page_handler($page) {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'add_person',
+                        'id' => 'add_person',
                         'href' => "qis/manage_person/$qis_group_guid",
                         'text' => elgg_echo('add_person'),
                         'title' => elgg_echo('add_person'),
@@ -131,6 +133,7 @@ function qis_page_handler($page) {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'manage_immigration_requests',
+                        'id' => 'manage_immigration_requests',
                         'href' => "qis/manage_immigration_requests/$qis_group_guid",
                         'text' => elgg_echo('manage_immigration_requests'),
                         'title' => elgg_echo('manage_immigration_requests'),
@@ -139,6 +142,7 @@ function qis_page_handler($page) {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'request_resident_permit',
+                        'id' => 'request_resident_permit',
                         'href' => "qis/manage_rp_request/$qis_group_guid",
                         'text' => elgg_echo('request_resident_permit'),
                         'title' => elgg_echo('request_resident_permit'),
@@ -147,6 +151,7 @@ function qis_page_handler($page) {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'manage_corporate_information',
+                        'id' => 'manage_corporate_information',
                         'href' => "qis/manage_corporate_info/$qis_group_guid",
                         'text' => elgg_echo('manage_corporate_information'),
                         'title' => elgg_echo('manage_corporate_information'),
@@ -155,6 +160,7 @@ function qis_page_handler($page) {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'manage_quota_requests',
+                        'id' => 'manage_quota_requests',
                         'href' => "qis/manage_quota_requests/$qis_group_guid",
                         'text' => elgg_echo('manage_quota_requests'),
                         'title' => elgg_echo('manage_quota_requests'),
@@ -163,6 +169,7 @@ function qis_page_handler($page) {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'manage_quota_request',
+                        'id' => 'manage_quota_request',
                         'href' => "qis/manage_quota_request/$qis_group_guid",
                         'text' => elgg_echo('manage_quota_request'),
                         'title' => elgg_echo('manage_quota_request'),
@@ -171,6 +178,7 @@ function qis_page_handler($page) {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'request_work_visa_permit',
+                        'id' => 'request_work_visa_permit',
                         'href' => "qis/manage_wv_request/$qis_group_guid",
                         'text' => elgg_echo('request_work_visa_permit'),
                         'title' => elgg_echo('request_work_visa_permit'),
@@ -179,6 +187,7 @@ function qis_page_handler($page) {
                 ));
 	elgg_register_menu_item('qis', array(
                         'name' => 'manage_quotas',
+                        'id' => 'manage_quotas',
                         'href' => "qis/manage_quotas/$qis_group_guid",
                         'text' => elgg_echo('manage_quotas'),
                         'title' => elgg_echo('manage_quotas'),

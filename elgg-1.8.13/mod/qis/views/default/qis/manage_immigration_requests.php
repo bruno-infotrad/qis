@@ -5,7 +5,7 @@ $expli = elgg_extract('expli', $vars, FALSE);
 if ($expli) {
 	$content = '<div id="qis-message">'.$expli.'</div>';
 }
-$content .= '<div><table id="qis_ris"><tr><th>Type</th><th>Person</th><th>Occupation</th><th>Country</th><th>Duration</th><th>Action</th></tr>';
+$content .= '<div id="qis_ris_resident"><table id="qis_ris"><tr><th>Type</th><th>Person</th><th>Occupation</th><th>Country</th><th>Duration</th><th>Action</th></tr>';
 foreach ($immigration_requests as $immigration_request) {
 	$content .= elgg_view('qis/immigration_request',array('group_guid'=> $group_guid,'immigration_request' => $immigration_request));
 }
